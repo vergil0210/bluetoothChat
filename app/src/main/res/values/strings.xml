@@ -15,4 +15,6 @@
     <string name="refresh">refresh</string>
     <string name="bluetooth">Bluetooth</string>
     <string name="device_name">Device name</string>
+    <string name="chat">Chat</string>
+    <string name="v">V</string>
 </resources>

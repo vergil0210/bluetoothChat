@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Window;
 import android.widget.Toast;
 
 import com.hdjd.bluetooth.threadPool.ExecutorFactory;
@@ -19,6 +20,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // hide title
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_main);
 
         BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
