@@ -1,5 +1,6 @@
 package com.hdjd.bluetooth;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Menu;
@@ -8,6 +9,7 @@ import android.widget.Button;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
+import com.hdjd.bluetooth.service.BluetoothService;
 
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -26,6 +28,8 @@ public class FirstActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first);
         initView();
+        // start service
+        startService(new Intent(this, BluetoothService.class));
     }
 
     private void initView(){
@@ -35,13 +39,12 @@ public class FirstActivity extends AppCompatActivity {
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(view -> {
             // 悬浮按钮回调
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show();
+            startActivity(new Intent(this,SearchActivity.class));
         });
-        Button search = findViewById(R.id.action_search);
-        search.setOnClickListener(View ->{
-
-        });
+//        FloatingActionButton search = findViewById(R.id.action_search);
+//        search.setOnClickListener(view ->{
+//            startActivity(new Intent(this,SearchActivity.class));
+//        });
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
@@ -68,5 +71,11 @@ public class FirstActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        stopService(new Intent(this,SearchActivity.class));
     }
 }
